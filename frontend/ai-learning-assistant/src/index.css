@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* =========================================
+   CSS Custom Properties (Design Tokens)
+   ========================================= */
+:root {
+  --font-display: 'Urbanist', sans-serif;
+
+  /* Brand colours */
+  --color-primary: #FF9324;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+  --color-teal-100: #ccfbf1;
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-rose-500: #f43f5e;
+  --color-rose-600: #e11d48;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-yellow-500: #eab308;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-cyan-500: #06b6d4;
+  --color-purple-400: #c084fc;
+  --color-pink-500: #ec4899;
+
+  /* Gradients */
+  --gradient-emerald: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
+  --gradient-emerald-br: linear-gradient(to bottom right, var(--color-emerald-400), var(--color-teal-500));
+  --gradient-emerald-hover: linear-gradient(to right, var(--color-emerald-600), var(--color-teal-600));
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+  --shadow-emerald: 0 10px 15px -3px rgba(16,185,129,0.25);
+  --shadow-slate: 0 20px 25px -5px rgba(100,116,139,0.5);
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+}
+
+/* =========================================
+   Reset & Base
+   ========================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #fcfbfc;
+  color: var(--color-slate-900);
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* =========================================
+   Utility classes used across many components
+   ========================================= */
+
+/* Glassmorphism card — used everywhere */
+.glass-card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(226,232,240,0.6);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl), 0 0 0 0 transparent;
+}
+
+/* Dot-grid background pattern */
+.dot-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Gradient button base */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  background: var(--gradient-emerald);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-emerald);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: var(--gradient-emerald-hover);
+  box-shadow: 0 20px 25px -5px rgba(16,185,129,0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-ring {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* Bounce animation for chat dots */
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-6px); }
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Spin for SVG spinner */
+@keyframes spin-svg {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin-svg 1s linear infinite;
+}
+
+/* Progress bar fill animation */
+@keyframes progressFill {
+  from { width: 0; }
+}

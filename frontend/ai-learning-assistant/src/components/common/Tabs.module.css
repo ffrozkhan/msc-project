@@ -1,0 +1,72 @@
+.tabs {
+  width: 100%;
+}
+
+.tabList {
+  position: relative;
+  border-bottom: 2px solid var(--color-slate-100);
+  display: flex;
+  gap: 8px;
+}
+
+.tabBtn {
+  position: relative;
+  padding-bottom: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all var(--transition-base);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-slate-600);
+}
+
+@media (min-width: 768px) {
+  .tabBtn {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.tabBtn:hover {
+  color: var(--color-slate-900);
+}
+
+.tabBtnActive {
+  color: var(--color-emerald-600);
+}
+
+.tabIndicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
+  border-radius: 9999px;
+  box-shadow: 0 4px 6px -1px rgba(16,185,129,0.25);
+}
+
+.tabBg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(236,253,245,0.5), transparent);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  z-index: -1;
+}
+
+.tabContent {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.tabPanel {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

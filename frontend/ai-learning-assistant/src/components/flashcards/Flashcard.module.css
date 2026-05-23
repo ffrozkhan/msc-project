@@ -1,0 +1,163 @@
+.cardWrap {
+  position: relative;
+  width: 100%;
+  height: 288px;
+  perspective: 1000px;
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.cardFlipped {
+  transform: rotateY(180deg);
+}
+
+/* Shared face */
+.face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-2xl);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Front */
+.front {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 2px solid rgba(226,232,240,0.6);
+  box-shadow: var(--shadow-xl), 0 0 0 0 transparent;
+}
+
+/* Back */
+.back {
+  background: linear-gradient(to bottom right, var(--color-emerald-500), var(--color-teal-500));
+  border: 2px solid rgba(52,211,153,0.6);
+  box-shadow: 0 20px 25px -5px rgba(16,185,129,0.3);
+  transform: rotateY(180deg);
+}
+
+.faceTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.difficultyBadge {
+  background: var(--color-slate-100);
+  color: var(--color-slate-600);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 4px 16px;
+}
+
+.starBtnFront {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  border: none;
+  cursor: pointer;
+}
+
+.starActive {
+  background: linear-gradient(to bottom right, var(--color-amber-400), var(--color-yellow-500));
+  color: #fff;
+  box-shadow: 0 10px 15px -3px rgba(245,158,11,0.25);
+}
+
+.starInactive {
+  background: var(--color-slate-100);
+  color: var(--color-slate-400);
+}
+
+.starInactive:hover {
+  background: var(--color-slate-200);
+  color: var(--color-amber-500);
+}
+
+.starBtnBack {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  border: none;
+  cursor: pointer;
+}
+
+.starBtnBackActive {
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.starBtnBackInactive {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(4px);
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.starBtnBackInactive:hover {
+  background: rgba(255,255,255,0.3);
+  color: #fff;
+}
+
+.faceBody {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.question {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-slate-900);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.answer {
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.flipHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-slate-400);
+}
+
+.flipHintBack {
+  color: rgba(255,255,255,0.7);
+}

@@ -1,0 +1,98 @@
+.wrapper {
+  color: #404040;
+}
+
+.wrapper h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.wrapper h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.wrapper h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+.wrapper h4 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.wrapper p {
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+
+.wrapper a {
+  color: #00d492;
+  text-decoration: none;
+}
+
+.wrapper a:hover {
+  text-decoration: underline;
+}
+
+.wrapper ul {
+  list-style: disc;
+  list-style-position: inside;
+  margin-bottom: 8px;
+  margin-left: 16px;
+}
+
+.wrapper ol {
+  list-style: decimal;
+  list-style-position: inside;
+  margin-bottom: 8px;
+  margin-left: 16px;
+}
+
+.wrapper li {
+  margin-bottom: 4px;
+}
+
+.wrapper strong {
+  font-weight: 600;
+}
+
+.wrapper em {
+  font-style: italic;
+}
+
+.wrapper blockquote {
+  border-left: 4px solid #d4d4d4;
+  padding-left: 16px;
+  font-style: italic;
+  color: #525252;
+  margin: 16px 0;
+}
+
+.inlineCode {
+  background: var(--color-neutral-100);
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.875rem;
+}
+
+.wrapper pre {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.875rem;
+  margin: 16px 0;
+}

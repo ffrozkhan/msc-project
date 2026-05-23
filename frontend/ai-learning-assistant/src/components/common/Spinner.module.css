@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.svg {
+  width: 24px;
+  height: 24px;
+  color: #00d492;
+  animation: spin 1s linear infinite;
+}
+
+.circleTrack {
+  opacity: 0.25;
+}
+
+.circleFill {
+  opacity: 0.75;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

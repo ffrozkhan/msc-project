@@ -1,0 +1,22 @@
+# frontend dependencies
+frontend/node_modules/
+
+# backend dependencies
+backend/node_modules/
+
+# env files
+frontend/.env
+backend/.env
+
+# logs
+*.log
+
+# build folders
+frontend/build/
+frontend/dist/
+
+# vscode
+.vscode/
+
+# mac
+.DS_Store

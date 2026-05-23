@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-slate-900);
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--color-slate-500);
+}
