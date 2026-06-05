@@ -1,0 +1,44 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ai_backend
+    restart: unless-stopped
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
+      PORT: ${PORT}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRE: ${JWT_EXPIRE}
+      NODE_ENV: ${NODE_ENV}
+      MAX_FILE_SIZE: ${MAX_FILE_SIZE}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+    volumes:
+      - uploads_data:/app/uploads
+    ports:
+      - "8000:8000"
+    networks:
+      - app_network
+
+  frontend:
+    build:
+      context: ./frontend/ai-learning-assistant
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    container_name: ai_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+volumes:
+  uploads_data:
+
+networks:
+  app_network:
+    driver: bridge
