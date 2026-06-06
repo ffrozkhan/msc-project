@@ -25,16 +25,17 @@ services:
     build:
       context: ./frontend/ai-learning-assistant
       dockerfile: Dockerfile
-      args:
-        VITE_API_URL: ${VITE_API_URL}
     container_name: ai_frontend
-    restart: unless-stopped
+    volumes:
+      - ./frontend/ai-learning-assistant:/app
+      - /app/node_modules
     ports:
-      - "80:80"
+    - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev -- --host 0.0.0.0
     depends_on:
-      - backend
-    networks:
-      - app_network
+    - backend
 
 volumes:
   uploads_data:
