@@ -8,7 +8,7 @@
 .svg {
   width: 24px;
   height: 24px;
-  color: #00d492;
+  color: rgb(16, 137, 211);
   animation: spin 1s linear infinite;
 }
 

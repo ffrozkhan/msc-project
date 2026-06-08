@@ -44,7 +44,7 @@
   width: 56px;
   height: 56px;
   border-radius: var(--radius-xl);
-  background: linear-gradient(to bottom right, var(--color-emerald-400), var(--color-teal-500));
+  background: var(--background-blue);
   box-shadow: 0 10px 15px -3px rgba(16,185,129,0.25);
   margin-bottom: 24px;
   color: #fff;
@@ -101,7 +101,7 @@
 }
 
 .inputIconFocused {
-  color: var(--color-emerald-500);
+  color: rgb(16, 137, 211);
 }
 
 .inputIconDefault {
@@ -128,7 +128,7 @@
 }
 
 .input:focus {
-  border-color: var(--color-emerald-500);
+  border-color:rgb(16, 137, 211);
   background: #fff;
   box-shadow: 0 10px 15px -3px rgba(16,185,129,0.1);
 }
@@ -151,21 +151,22 @@
   position: relative;
   width: 100%;
   height: 48px;
-  background: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
-  color: #fff;
+  background: var(--background-blue);
+  color: white;
   font-size: 0.875rem;
   font-weight: 600;
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: all var(--transition-base);
-  box-shadow: var(--shadow-emerald);
   overflow: hidden;
   font-family: inherit;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+  transition: all 0.2s ease-in-out;
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: linear-gradient(to right, var(--color-emerald-600), var(--color-teal-600));
+  transform: scale(1.01);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
 }
 
 .submitBtn:active:not(:disabled) {
@@ -200,7 +201,7 @@
 
 .footerLink {
   font-weight: 600;
-  color: var(--color-emerald-600);
+  color: rgb(16, 137, 211);
   transition: color var(--transition-base);
 }
 

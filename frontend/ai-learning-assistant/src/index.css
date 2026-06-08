@@ -72,6 +72,13 @@
   --transition-fast: 150ms ease;
   --transition-base: 200ms ease;
   --transition-slow: 300ms ease;
+
+  /* Backgrounds */
+  --background-blue: linear-gradient(
+    45deg,
+    rgb(16, 137, 211) 0%,
+    rgb(18, 177, 209) 100%
+  );
 }
 
 /* =========================================
@@ -179,6 +186,25 @@ ul, ol {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+}
+
+.btn-primary-blue{
+   background: linear-gradient(
+    45deg,
+    rgb(16, 137, 211),
+    rgb(18, 177, 209)
+  );
+  color: #fff;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary-blue:hover:not(:disabled)  {
+  background: rgb(16, 137, 211);
+  box-shadow: 0 20px 25px -5px rgba(16, 137, 211, .3);
+}
+.btn-primary-blue:hover {
+  background: rgb(16, 137, 211);
+  box-shadow: 0 20px 25px -5px rgba(16, 137, 211, .3);
 }
 
 /* Spinner animation */

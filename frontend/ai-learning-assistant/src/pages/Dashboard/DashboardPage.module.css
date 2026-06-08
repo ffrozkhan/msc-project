@@ -210,7 +210,7 @@
   padding: 8px 16px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--color-emerald-600);
+  color: rgb(16, 137, 211);
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
   white-space: nowrap;
@@ -219,7 +219,7 @@
 
 .activityLink:hover {
   color: var(--color-emerald-700);
-  background: #ecfdf5;
+  background: rgba(16, 137, 211, .1);
 }
 
 /* Empty activity */

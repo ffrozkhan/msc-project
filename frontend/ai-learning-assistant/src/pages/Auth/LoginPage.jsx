@@ -42,8 +42,8 @@ const LoginPage = () => {
             <div className={styles.logoWrap}>
               <BrainCircuit size={28} strokeWidth={2} />
             </div>
-            <h1 className={styles.cardTitle}>Welcome back</h1>
-            <p className={styles.cardSubtitle}>Sign in to continue your journey</p>
+            <h1 className={styles.cardTitle}>Welcome!</h1>
+            <p className={styles.cardSubtitle}>Login to continue your learning</p>
           </div>
 
           <div className={styles.fields}>
@@ -60,7 +60,7 @@ const LoginPage = () => {
                   onFocus={() => setFocusedField('email')}
                   onBlur={() => setFocusedField(null)}
                   className={styles.input}
-                  placeholder="you@example.com"
+                  placeholder="youremail@sample.com"
                 />
               </div>
             </div>
@@ -92,9 +92,9 @@ const LoginPage = () => {
             <button onClick={handleSubmit} disabled={loading} className={styles.submitBtn}>
               <span className={styles.submitBtnInner}>
                 {loading ? (
-                  <><span className={styles.spinnerRing} /> Signing in...</>
+                  <><span className={styles.spinnerRing} /> Logging in...</>
                 ) : (
-                  <>Sign in <ArrowRight size={16} strokeWidth={2.5} /></>
+                  <>Log in <ArrowRight size={16} strokeWidth={2.5} /></>
                 )}
               </span>
             </button>
@@ -108,7 +108,7 @@ const LoginPage = () => {
           </div>
         </div>
 
-        <p className={styles.legalText}>By continuing, you agree to our Terms & Privacy Policy</p>
+        {/* <p className={styles.legalText}>By continuing, you agree to our Terms & Privacy Policy</p> */}
       </div>
     </div>
   );

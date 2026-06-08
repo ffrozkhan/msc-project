@@ -85,7 +85,7 @@
   right: 6px;
   width: 8px;
   height: 8px;
-  background: var(--color-emerald-500);
+  background: rgb(16, 137, 211);
   border-radius: 50%;
   outline: 2px solid #fff;
 }
@@ -116,7 +116,7 @@
   width: 36px;
   height: 36px;
   border-radius: var(--radius-lg);
-  background: linear-gradient(to bottom right, var(--color-emerald-400), var(--color-teal-500));
+  background: var(--background-blue);
   display: flex;
   align-items: center;
   justify-content: center;

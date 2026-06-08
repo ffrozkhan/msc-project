@@ -75,7 +75,7 @@
   width: 36px;
   height: 36px;
   border-radius: var(--radius-lg);
-  background: linear-gradient(to bottom right, var(--color-emerald-400), var(--color-teal-500));
+  background: var(--background-blue);
   box-shadow: 0 4px 6px -1px rgba(16,185,129,0.2);
   color: #fff;
 }
@@ -138,9 +138,9 @@
 }
 
 .navLinkActive {
-  background: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
+  background: var(--background-blue);
   color: #fff;
-  box-shadow: var(--shadow-emerald);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
 }
 
 .footer {

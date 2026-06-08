@@ -224,7 +224,7 @@
 .textInput::placeholder { color: var(--color-slate-400); }
 
 .textInput:focus {
-  border-color: var(--color-emerald-500);
+  border-color: rgb(16, 137, 211);
   background: #fff;
   box-shadow: 0 10px 15px -3px rgba(16,185,129,0.1);
 }
@@ -238,7 +238,7 @@
 }
 
 .dropzone:hover {
-  border-color: #6ee7b7;
+  border-color: rgb(16, 137, 211);;
   background: rgba(236,253,245,0.3);
 }
 
@@ -279,7 +279,7 @@
   margin-bottom: 4px;
 }
 
-.dropzoneTextHighlight { color: var(--color-emerald-600); }
+.dropzoneTextHighlight { color: rgb(16, 137, 211); }
 
 .dropzoneHint {
   font-size: 0.75rem;
@@ -314,14 +314,14 @@
   flex: 1;
   height: 44px;
   padding: 0 16px;
-  background: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
+  /* background: var(--background-blue); */
   color: #fff;
   font-size: 0.875rem;
   font-weight: 600;
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: all var(--transition-base);
+  /* transition: all var(--transition-slow) 0.5s; */
   box-shadow: var(--shadow-emerald);
   display: flex;
   align-items: center;
@@ -330,7 +330,7 @@
   font-family: inherit;
 }
 
-.submitBtn:hover:not(:disabled) { background: linear-gradient(to right, var(--color-emerald-600), var(--color-teal-600)); }
+/* .submitBtn:hover:not(:disabled) { background: rgb(16, 137, 211); } */
 .submitBtn:active:not(:disabled) { transform: scale(0.98); }
 .submitBtn:disabled { opacity: 0.5; cursor: not-allowed; }
 
