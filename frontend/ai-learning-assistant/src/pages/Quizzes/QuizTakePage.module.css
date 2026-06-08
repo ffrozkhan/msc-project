@@ -59,8 +59,8 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: linear-gradient(to right, #ecfdf5, #f0fdfb);
-  border: 1px solid #a7f3d0;
+  background: rgba(16, 137, 211, .1);
+  border: 1px solid rgb(16, 137, 211);
   border-radius: var(--radius-lg);
   margin-bottom: 24px;
 }
@@ -68,7 +68,7 @@
 .questionDot {
   width: 8px;
   height: 8px;
-  background: var(--color-emerald-500);
+  background: rgb(16, 137, 211);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
@@ -181,14 +181,14 @@
   position: relative;
   padding: 0 32px;
   height: 48px;
-  background: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
+  background: var(--background-blue);
   color: #fff;
   font-weight: 600;
   font-size: 0.875rem;
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: all var(--transition-base);
+  /* transition: all var(--transition-base); */
   box-shadow: var(--shadow-emerald);
   display: flex;
   align-items: center;
@@ -197,7 +197,7 @@
   font-family: inherit;
 }
 
-.submitBtn:hover:not(:disabled) { background: linear-gradient(to right, var(--color-emerald-600), var(--color-teal-600)); }
+.submitBtn:hover:not(:disabled) { background: rgb(16, 137, 211); }
 .submitBtn:active:not(:disabled) { transform: scale(0.95); }
 .submitBtn:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -224,7 +224,7 @@
 }
 
 .dotCurrent {
-  background: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
+  background: rgba(16, 137, 211, .7);
   color: #fff;
   box-shadow: var(--shadow-emerald);
   transform: scale(1.1);

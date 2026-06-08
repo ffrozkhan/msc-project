@@ -163,7 +163,7 @@ const DocumentListPage = () => {
               </div>
               <div className={styles.formActions}>
                 <button type="button" onClick={() => setIsUploadModalOpen(false)} disabled={uploading} className={styles.cancelBtn}>Cancel</button>
-                <button type="submit" disabled={uploading} className={styles.submitBtn}>
+                <button type="submit" disabled={uploading} className={"btn-primary-blue " + styles.submitBtn}>
                   {uploading ? <><span className={styles.spinnerRing} /> Uploading...</> : "Upload"}
                 </button>
               </div>

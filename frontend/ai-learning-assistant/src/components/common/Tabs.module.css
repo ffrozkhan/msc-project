@@ -35,7 +35,7 @@
 }
 
 .tabBtnActive {
-  color: var(--color-emerald-600);
+  color: rgb(16, 137, 211);
 }
 
 .tabIndicator {
@@ -44,7 +44,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
+  background: var(--background-blue);
   border-radius: 9999px;
   box-shadow: 0 4px 6px -1px rgba(16,185,129,0.25);
 }

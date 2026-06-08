@@ -44,6 +44,7 @@
 }
 
 .inputIcon {
+  height: 100%;
   position: absolute;
   inset-y: 0;
   left: 0;
@@ -84,7 +85,7 @@
 .input::placeholder { color: var(--color-neutral-400); }
 
 .input:focus {
-  box-shadow: 0 0 0 2px #00d492;
+  box-shadow: 0 0 0 2px rgb(16, 137, 211);;
   border-color: transparent;
 }
 

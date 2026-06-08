@@ -9,7 +9,7 @@
   margin-bottom: 16px;
 }
 
-.backLink:hover { color: var(--color-neutral-900); }
+.backLink:hover { color: rgb(16, 137, 211); }
 
 /* PDF Viewer */
 .pdfContainer {

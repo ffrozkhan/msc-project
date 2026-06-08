@@ -13,8 +13,8 @@
 }
 
 .card:hover {
-  border-color: #6ee7b7;
-  box-shadow: 0 10px 15px -3px rgba(16,185,129,0.1);
+  border-color: rgba(16, 137, 211, .5);
+  box-shadow: 0 10px 15px -3px rgba(16, 137, 211,0.1);
 }
 
 .deleteBtn {
@@ -50,13 +50,13 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
+  background: rgba(16, 137, 211, .1);
+  border: 1px solid rgba(16, 137, 211, .5);;
   border-radius: var(--radius-md);
   padding: 4px 12px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #065f46;
+  color: rgb(16, 137, 211);
 }
 
 .titleSection {
@@ -137,15 +137,15 @@
   position: relative;
   width: 100%;
   height: 44px;
-  background: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
+  background: var(--background-blue);
   color: #fff;
   font-weight: 600;
   font-size: 0.875rem;
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: all var(--transition-base);
-  box-shadow: var(--shadow-emerald);
+  /* transition: all var(--transition-base); */
+  box-shadow: rgba(16, 137, 211,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,7 +155,7 @@
 }
 
 .startBtn:hover {
-  background: linear-gradient(to right, var(--color-emerald-600), var(--color-teal-600));
+  background: rgb(16, 137, 211);
 }
 
 .startBtn:active {

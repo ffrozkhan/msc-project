@@ -12,7 +12,7 @@
   transition: color var(--transition-base);
 }
 
-.backLink:hover { color: var(--color-emerald-600); }
+.backLink:hover { color: rgb(16, 137, 211); }
 
 /* Score card */
 .scoreCard {
@@ -34,10 +34,10 @@
   width: 60px;
   height: 60px;
   border-radius: var(--radius-xl);
-  background: linear-gradient(to bottom right, #d1fae5, #ccfbf1);
-  box-shadow: var(--shadow-emerald);
+  background: rgba(16, 137, 211, .1);;
+  box-shadow: rgba(16, 137, 211);
   margin-bottom: 24px;
-  color: var(--color-emerald-600);
+  color: rgba(16, 137, 211);
 }
 
 .scoreLabel {
@@ -266,14 +266,14 @@
   position: relative;
   padding: 0 32px;
   height: 48px;
-  background: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
+  background: var(--background-blue);
   color: #fff;
   font-weight: 600;
   font-size: 0.875rem;
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: all var(--transition-base);
+  /* transition: all var(--transition-base); */
   box-shadow: var(--shadow-emerald);
   display: inline-flex;
   align-items: center;
@@ -282,7 +282,7 @@
   font-family: inherit;
 }
 
-.returnBtn:hover { background: linear-gradient(to right, var(--color-emerald-600), var(--color-teal-600)); }
+.returnBtn:hover { background: rgb(16, 137, 211); }
 .returnBtn:active { transform: scale(0.95); }
 
 .centered { display: flex; align-items: center; justify-content: center; min-height: 60vh; }

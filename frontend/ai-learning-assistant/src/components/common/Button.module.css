@@ -37,13 +37,17 @@
 
 /* Variants */
 .primary {
-  background: linear-gradient(to right, var(--color-emerald-500), var(--color-teal-500));
+  background: linear-gradient(
+    45deg,
+    rgb(16, 137, 211),
+    rgb(18, 177, 209)
+  );
   color: #fff;
-  box-shadow: var(--shadow-emerald);
+  transition: filter 0.2s ease, transform 0.2s ease;
 }
 
 .primary:hover:not(:disabled) {
-  background: linear-gradient(to right, var(--color-emerald-600), var(--color-teal-600));
+  background: rgb(16, 137, 211);
   box-shadow: 0 20px 25px -5px rgba(16,185,129,0.3);
 }
 

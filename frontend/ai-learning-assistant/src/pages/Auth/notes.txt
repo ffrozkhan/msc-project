@@ -1,0 +1,26 @@
+background color - linear-gradient(
+    45deg,
+    rgb(16, 137, 211) 0%,
+    rgb(18, 177, 209) 100%
+  )
+
+  text color - color: rgb(16, 137, 211);
+  text color - color: rgba(16, 137, 211, .1);
+  text color - color: rgba(16, 137, 211, .2);
+  text color - color: rgba(16, 137, 211, .5);
+
+
+  .primary {
+  background: linear-gradient(
+    45deg,
+    rgb(16, 137, 211),
+    rgb(18, 177, 209)
+  );
+  color: #fff;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.primary:hover:not(:disabled) {
+  background: rgb(16, 137, 211);
+  box-shadow: 0 20px 25px -5px rgba(16,185,129,0.3);
+}
