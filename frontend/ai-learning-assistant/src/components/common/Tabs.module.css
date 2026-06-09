@@ -21,6 +21,7 @@
   border: none;
   cursor: pointer;
   color: var(--color-slate-600);
+  z-index: 0;
 }
 
 @media (min-width: 768px) {

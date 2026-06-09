@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Spinner from '../../components/common/Spinner';
 import progressService from '../../services/progressService';
 import toast from 'react-hot-toast';
-import { FileText, BookOpen, BrainCircuit, TrendingUp, Clock } from 'lucide-react';
+import { FileText, BookOpen, Brain, TrendingUp, Clock } from 'lucide-react';
 import styles from './DashboardPage.module.css';
 
 const DashboardPage = () => {
@@ -39,7 +39,7 @@ const DashboardPage = () => {
   const stats = [
     { label: 'Total Documents', value: dashboardData.overview.totalDocuments, icon: FileText, gradient: styles.gradientBlue },
     { label: 'Total Flashcards', value: dashboardData.overview.totalFlashcards, icon: BookOpen, gradient: styles.gradientPurple },
-    { label: 'Total Quizzes', value: dashboardData.overview.totalQuizzes, icon: BrainCircuit, gradient: styles.gradientEmerald },
+    { label: 'Total Quizzes', value: dashboardData.overview.totalQuizzes, icon: Brain, gradient: styles.gradientEmerald },
   ];
 
   const activities = [
