@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { LayoutDashboard, FileText, User, LogOut, BrainCircuit, BookOpen, X } from "lucide-react";
+import { LayoutDashboard, FileText, User, LogOut, Brain, BookOpen, X } from "lucide-react";
 import styles from './Sidebar.module.css';
 
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
@@ -32,7 +32,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         <div className={styles.logoRow}>
           <div className={styles.logoInner}>
             <div className={styles.logoIcon}>
-              <BrainCircuit size={20} strokeWidth={2.5} />
+              <Brain size={20} strokeWidth={2.5} />
             </div>
             <h1 className={styles.logoText}>AI Learning Assistant</h1>
           </div>
