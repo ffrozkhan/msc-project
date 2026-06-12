@@ -111,7 +111,9 @@ const FlashcardPage = () => {
   return (
     <div>
       <div style={{ marginBottom: '16px' }}>
-        <Link to={`/documents/${documentId}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.875rem', color: 'var(--color-neutral-600)', textDecoration: 'none' }}>
+        <Link to={`/documents/${documentId}`} 
+        style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.875rem', color: 'var(--color-neutral-600)', textDecoration: 'none' }}
+        >
           <ArrowLeft size={16} /> Back to Document
         </Link>
       </div>

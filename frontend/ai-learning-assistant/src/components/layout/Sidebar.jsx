@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { LayoutDashboard, FileText, User, LogOut, Brain, BookOpen, X } from "lucide-react";
+import { LayoutDashboard, FileText, User, LogOut, Brain, BookOpen, X, MessageSquare, BrainCircuit } from "lucide-react";
 import styles from './Sidebar.module.css';
 
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
@@ -18,6 +18,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
     { to: '/documents', icon: FileText, text: 'Documents' },
     { to: '/flashcards', icon: BookOpen, text: 'Flashcards' },
     { to: '/profile', icon: User, text: 'Profile' },
+    { to: '/ai-chat', icon: MessageSquare, text: 'AI Chat' },
   ];
 
   return (

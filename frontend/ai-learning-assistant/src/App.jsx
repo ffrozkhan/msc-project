@@ -18,6 +18,7 @@ import QuizTakePage from "./pages/Quizzes/QuizTakePage";
 import QuizResultPage from "./pages/Quizzes/QuizResultPage";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import { useAuth } from "./context/AuthContext";
+import AIChatPage from './pages/AIChat/AIChatPage';
 
 const App = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -49,6 +50,7 @@ const App = () => {
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/ai-chat" element={<AIChatPage />} />
           <Route path="/documents" element={<DocumentListPage />} />
           <Route path="/documents/:id" element={<DocumentDetailPage />} />
           <Route path="/flashcards" element={<FlashcardsListPage />} />

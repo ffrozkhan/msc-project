@@ -45,4 +45,13 @@ export const API_PATHS = {
   PROGRESS: {
     GET_DASHBOARD: "/api/progress/dashboard",
   },
+  
+  CONVERSATIONS: {
+  GET_ALL: "/api/conversations",
+  CREATE: "/api/conversations",
+  GET_BY_ID: (id) => `/api/conversations/${id}`,
+  SEND_MESSAGE: (id) => `/api/conversations/${id}/message`,
+  UPDATE_TITLE: (id) => `/api/conversations/${id}/title`,
+  DELETE: (id) => `/api/conversations/${id}`,
+},
 };
