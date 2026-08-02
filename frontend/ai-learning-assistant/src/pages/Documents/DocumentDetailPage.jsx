@@ -11,6 +11,7 @@ import AIActions from '../../components/ai/AIActions';
 import FlashcardManager from '../../components/flashcards/FlashcardManager';
 import QuizManager from '../../components/quizzes/QuizManager';
 import styles from './DocumentDetailPage.module.css';
+import VideoAnswer from '../../components/documents/VideoAnswer';
 
 const DocumentDetailPage = () => {
   const { id } = useParams();
@@ -65,6 +66,7 @@ const DocumentDetailPage = () => {
     { name: 'AI Actions', label: 'AI Actions', content: <AIActions /> },
     { name: 'Flashcards', label: 'Flashcards', content: <FlashcardManager documentId={id} /> },
     { name: 'Quizzes', label: 'Quizzes', content: <QuizManager documentId={id} /> },
+    { name: 'Video Answer', label: 'Video Answer', content: <VideoAnswer documentId={id} /> },
   ];
 
   if (loading) return <Spinner />;

@@ -14,11 +14,11 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   };
 
   const navLinks = [
+    { to: '/ai-chat', icon: MessageSquare, text: 'AI Chat' },
     { to: '/dashboard', icon: LayoutDashboard, text: 'Dashboard' },
     { to: '/documents', icon: FileText, text: 'Documents' },
     { to: '/flashcards', icon: BookOpen, text: 'Flashcards' },
     { to: '/profile', icon: User, text: 'Profile' },
-    { to: '/ai-chat', icon: MessageSquare, text: 'AI Chat' },
   ];
 
   return (
@@ -35,7 +35,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
             <div className={styles.logoIcon}>
               <Brain size={20} strokeWidth={2.5} />
             </div>
-            <h1 className={styles.logoText}>AI Learning Assistant</h1>
+            <h1 className={styles.logoText}>My Assistant</h1>
           </div>
           <button onClick={toggleSidebar} className={styles.closeBtn}>
             <X size={24} />
