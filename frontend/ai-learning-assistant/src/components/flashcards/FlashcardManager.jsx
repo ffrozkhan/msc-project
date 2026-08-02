@@ -50,25 +50,35 @@ const FlashcardManager = ({ documentId }) => {
 
   const handleNextCard = () => {
     if (selectedSet) {
-      handleReview(currentCardIndex);
+      // handleReview(currentCardIndex);
       setCurrentCardIndex((prev) => (prev + 1) % selectedSet.cards.length);
     }
   };
 
   const handlePrevCard = () => {
     if (selectedSet) {
-      handleReview(currentCardIndex);
+      // handleReview(currentCardIndex);
       setCurrentCardIndex((prev) => (prev - 1 + selectedSet.cards.length) % selectedSet.cards.length);
     }
   };
 
-  const handleReview = async (index) => {
-    const card = selectedSet?.cards[currentCardIndex];
-    if (!card) return;
-    try {
-      await flashcardService.reviewFlashcard(card._id, index);
-    } catch {}
-  };
+  // const handleReview = async (index) => {
+  //   const card = selectedSet?.cards[currentCardIndex];
+  //   if (!card) return;
+  //   try {
+  //     await flashcardService.reviewFlashcard(card._id, index);
+  //   } catch {}
+  // };
+
+  const handleReview = async (cardId, quality) => {
+  try {
+    await flashcardService.reviewFlashcard(cardId, quality);
+    // Move to next card
+    setCurrentCardIndex((prev) => (prev + 1) % selectedSet.cards.length);
+  } catch {
+    toast.error('Failed to save review.');
+  }
+};
 
   const handleToggleStar = async (cardId) => {
     try {
@@ -85,6 +95,7 @@ const FlashcardManager = ({ documentId }) => {
       toast.error("Failed to update star status.");
     }
   };
+
 
   const handleConfirmDelete = async () => {
     if (!setToDelete) return;
@@ -112,7 +123,7 @@ const FlashcardManager = ({ documentId }) => {
         </button>
         <div className={styles.cardCenter}>
           <div className={styles.cardMaxWidth}>
-            <Flashcard flashcard={currentCard} onToggleStar={handleToggleStar} />
+            <Flashcard flashcard={currentCard} onToggleStar={handleToggleStar} onReview={handleReview} />
           </div>
           <div className={styles.navControls}>
             <button onClick={handlePrevCard} disabled={selectedSet.cards.length <= 1} className={styles.navBtn}>

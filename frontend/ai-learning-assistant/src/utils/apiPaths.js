@@ -32,6 +32,8 @@ export const API_PATHS = {
     REVIEW_FLASHCARD: (cardId) => `/api/flashcards/${cardId}/review`,
     TOGGLE_STAR: (cardId) => `/api/flashcards/${cardId}/star`,
     DELETE_FLASHCARD_SET: (id) => `/api/flashcards/${id}`,
+    GET_DUE_CARDS: (documentId) => `/api/flashcards/due/${documentId}`,
+    REVIEW_FLASHCARD: (cardId) => `/api/flashcards/${cardId}/review`,
   },
 
   QUIZZES: {

@@ -1,8 +1,10 @@
 import Flashcard from '../models/Flashcard.js';
+import { sm2 } from '../utils/sm2.js';
 
 // @desc    Get all flashcards for a document
 // @route   GET /api/flashcards/:documentId
 // @access  Private
+
 export const getFlashcards = async (req, res, next) => {
   try {
     const flashcards = await Flashcard.find({
@@ -44,44 +46,76 @@ export const getAllFlashcardSets = async (req, res, next) => {
 // @desc    Mark flashcard as reviewed
 // @route   POST /api/flashcards/:cardId/review
 // @access  Private
-export const reviewFlashcard = async (req, res, next) => {
+// export const reviewFlashcard = async (req, res, next) => {
+//   try {
+//     const flashcardSet = await Flashcard.findOne({
+//       'cards._id': req.params.cardId,
+//       userId: req.user._id
+//     });
+
+//     if (!flashcardSet) {
+//       return res.status(404).json({
+//         success: false,
+//         error: 'Flashcard set or card not found',
+//         statusCode: 404
+//       });
+//     }
+
+//     const cardIndex = flashcardSet.cards.findIndex(card => card._id.toString() === req.params.cardId);
+
+//     if (cardIndex === -1) {
+//       return res.status(404).json({
+//         success: false,
+//         error: 'Card not found in set',
+//         statusCode: 404
+//       });
+//     }
+
+//     // Update review info
+//     flashcardSet.cards[cardIndex].lastReviewed = new Date();
+//     flashcardSet.cards[cardIndex].reviewCount += 1;
+
+//     await flashcardSet.save();
+
+//     res.status(200).json({
+//       success: true,
+//       data: flashcardSet,
+//       message: 'Flashcard reviewed successfully'
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+export const reviewFlashcard = async (req, res) => {
   try {
-    const flashcardSet = await Flashcard.findOne({
-      'cards._id': req.params.cardId,
-      userId: req.user._id
-    });
+    const { quality } = req.body; // 0, 3, 4, or 5
 
-    if (!flashcardSet) {
-      return res.status(404).json({
-        success: false,
-        error: 'Flashcard set or card not found',
-        statusCode: 404
-      });
+    if (quality === undefined || quality < 0 || quality > 5) {
+      return res.status(400).json({ success: false, message: 'Quality must be 0-5' });
     }
 
-    const cardIndex = flashcardSet.cards.findIndex(card => card._id.toString() === req.params.cardId);
+    // Find the flashcard set containing this card
+    const set = await Flashcard.findOne({ 'cards._id': req.params.cardId });
+    if (!set) return res.status(404).json({ success: false, message: 'Card not found' });
 
-    if (cardIndex === -1) {
-      return res.status(404).json({
-        success: false,
-        error: 'Card not found in set',
-        statusCode: 404
-      });
-    }
+    const card = set.cards.id(req.params.cardId);
+    if (!card) return res.status(404).json({ success: false, message: 'Card not found' });
 
-    // Update review info
-    flashcardSet.cards[cardIndex].lastReviewed = new Date();
-    flashcardSet.cards[cardIndex].reviewCount += 1;
+    // Run SM-2
+    const result = sm2(card, quality);
 
-    await flashcardSet.save();
+    card.easeFactor   = result.easeFactor;
+    card.interval     = result.interval;
+    card.repetitions  = result.repetitions;
+    card.nextReview   = result.nextReview;
+    card.lastReviewed = new Date();
 
-    res.status(200).json({
-      success: true,
-      data: flashcardSet,
-      message: 'Flashcard reviewed successfully'
-    });
-  } catch (error) {
-    next(error);
+    await set.save();
+
+    res.json({ success: true, data: { card, sm2: result } });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -154,5 +188,34 @@ export const deleteFlashcardSet = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
+  }
+};
+
+// GET /api/flashcards/due/:documentId
+export const getDueCards = async (req, res) => {
+  try {
+    const set = await Flashcard.findOne({
+      documentId: req.params.documentId,
+      userId: req.user._id
+    });
+
+    if (!set) return res.status(404).json({ success: false, message: 'No flashcard set found' });
+
+    const now = new Date();
+    const dueCards = set.cards.filter(card => !card.nextReview || new Date(card.nextReview) <= now);
+
+    res.json({
+      success: true,
+      data: {
+        due: dueCards,
+        total: set.cards.length,
+        dueCount: dueCards.length,
+        nextDue: set.cards
+          .filter(c => new Date(c.nextReview) > now)
+          .sort((a, b) => new Date(a.nextReview) - new Date(b.nextReview))[0]?.nextReview || null
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };

@@ -33,6 +33,26 @@ const flashcardSchema = new mongoose.Schema(
           type: Boolean,
           default: false,
         },
+        easeFactor:  { 
+          type: Number, 
+          default: 2.5 
+        },
+        interval:    { 
+          type: Number, 
+          default: 1 
+        },
+        repetitions: { 
+          type: Number, 
+          default: 0 
+        },
+        nextReview:  { 
+          type: Date,   
+          default: Date.now 
+        },
+        lastReviewed:{ 
+          type: Date,   
+          default: null 
+        },
       },
     ],
   },

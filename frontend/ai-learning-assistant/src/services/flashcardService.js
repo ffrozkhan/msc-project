@@ -19,37 +19,54 @@ const getFlashcardsForDocument = async (documentId) => {
   }
 };
 
-const reviewFlashcard = async (cardId, cardIndex) => {
-    try {
-        const response = await axiosInstance.post(API_PATHS.FLASHCARDS.REVIEW_FLASHCARD(cardId), { cardIndex });
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || { message: 'Failed to review flashcard' };
-    }
+// Updated — now sends quality rating for SM-2
+const reviewFlashcard = async (cardId, quality) => {
+  try {
+    const response = await axiosInstance.post(
+      API_PATHS.FLASHCARDS.REVIEW_FLASHCARD(cardId),
+      { quality }
+    );
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { message: 'Failed to review flashcard' };
+  }
+};
+
+// New — get cards due for review today
+const getDueCards = async (documentId) => {
+  try {
+    const response = await axiosInstance.get(
+      API_PATHS.FLASHCARDS.GET_DUE_CARDS(documentId)
+    );
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { message: 'Failed to fetch due cards' };
+  }
 };
 
 const toggleStar = async (cardId) => {
-    try {
-        const response = await axiosInstance.put(API_PATHS.FLASHCARDS.TOGGLE_STAR(cardId));
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || { message: 'Failed to star flashcard' };
-    }
+  try {
+    const response = await axiosInstance.put(API_PATHS.FLASHCARDS.TOGGLE_STAR(cardId));
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { message: 'Failed to star flashcard' };
+  }
 };
 
 const deleteFlashcardSet = async (id) => {
-    try {
-        const response = await axiosInstance.delete(API_PATHS.FLASHCARDS.DELETE_FLASHCARD_SET(id));
-        return response.data;
-    } catch (error) {
-        throw error.response?.data || { message: 'Failed to delete flashcards' };
-    }
+  try {
+    const response = await axiosInstance.delete(API_PATHS.FLASHCARDS.DELETE_FLASHCARD_SET(id));
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { message: 'Failed to delete flashcards' };
+  }
 };
 
 const flashcardService = {
   getAllFlashcardSets,
   getFlashcardsForDocument,
   reviewFlashcard,
+  getDueCards,
   toggleStar,
   deleteFlashcardSet,
 };
