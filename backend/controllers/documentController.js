@@ -5,6 +5,9 @@ import { extractTextFromPDF } from '../utils/pdfParser.js';
 import { chunkText } from '../utils/textChunker.js';
 import fs from 'fs/promises';
 import mongoose from 'mongoose';
+import ChatHistory   from '../models/ChatHistory.js';
+import VideoAnswer   from '../models/VideoAnswer.js';
+import ReviewHistory from '../models/ReviewHistory.js';
 
 // @desc    Upload PDF document
 // @route   POST /api/documents/upload
@@ -186,9 +189,39 @@ export const getDocument = async (req, res, next) => {
 // @desc    Delete document
 // @route   DELETE /api/documents/:id
 // @access  Private
+// export const deleteDocument = async (req, res, next) => {
+//   try {
+//    const document = await Document.findOne({
+//       _id: req.params.id,
+//       userId: req.user._id
+//     });
+
+//     if (!document) {
+//       return res.status(404).json({
+//         success: false,
+//         error: 'Document not found',
+//         statusCode: 404
+//       });
+//     }
+
+//     // Delete file from filesystem
+//     await fs.unlink(document.filePath).catch(() => {});
+
+//     // Delete document
+//     await document.deleteOne();
+
+//     res.status(200).json({
+//       success: true,
+//       message: 'Document deleted successfully'
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 export const deleteDocument = async (req, res, next) => {
   try {
-   const document = await Document.findOne({
+    const document = await Document.findOne({
       _id: req.params.id,
       userId: req.user._id
     });
@@ -201,11 +234,22 @@ export const deleteDocument = async (req, res, next) => {
       });
     }
 
+    const documentId = document._id;
+
     // Delete file from filesystem
     await fs.unlink(document.filePath).catch(() => {});
 
-    // Delete document
+    // Delete document record
     await document.deleteOne();
+
+    // Clean up all related data in parallel
+    await Promise.all([
+      Flashcard.deleteMany({ documentId }),
+      Quiz.deleteMany({ documentId }),
+      ChatHistory.deleteMany({ documentId }),
+      VideoAnswer.deleteMany({ document: documentId }),
+      ReviewHistory.deleteMany({ documentId }),
+    ]);
 
     res.status(200).json({
       success: true,

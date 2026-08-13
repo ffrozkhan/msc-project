@@ -5,6 +5,7 @@ import {
   reviewFlashcard,
   toggleStarFlashcard,
   deleteFlashcardSet,
+  getDueCards
 } from '../controllers/flashcardController.js';
 import protect from '../middleware/auth.js';
 
