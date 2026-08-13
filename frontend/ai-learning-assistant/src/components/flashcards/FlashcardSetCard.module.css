@@ -170,3 +170,57 @@
 .studyBtn:active {
   transform: scale(0.95);
 }
+
+
+.ratingRow {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 0 16px;
+  margin-top: 8px;
+}
+
+.rateBtn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all var(--transition-base);
+  color: #fff;
+}
+
+.rateBtn span {
+  font-size: 0.625rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.rateBtn:active { transform: scale(0.96); }
+
+.rateAgain { background: #e11d48; }
+.rateAgain:hover { background: #be123c; }
+
+.rateHard  { background: #d97706; }
+.rateHard:hover  { background: #b45309; }
+
+.rateGood  { background: #2563eb; }
+.rateGood:hover  { background: #1d4ed8; }
+
+.rateEasy  { background: #059669; }
+.rateEasy:hover  { background: #047857; }
+
+.nextReview {
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  margin-top: 8px;
+  padding-bottom: 4px;
+}

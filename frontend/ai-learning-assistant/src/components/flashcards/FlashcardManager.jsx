@@ -8,6 +8,9 @@ import Spinner from "../common/Spinner";
 import Modal from "../common/Modal";
 import Flashcard from "./Flashcard";
 import styles from "./FlashcardManager.module.css";
+import FlashcardStats from './FlashcardStats';
+import DueCardsSession from './DueCardsSession';
+
 
 const FlashcardManager = ({ documentId }) => {
   const [flashcardSets, setFlashcardSets] = useState([]);
@@ -18,6 +21,8 @@ const FlashcardManager = ({ documentId }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [setToDelete, setSetToDelete] = useState(null);
+  // const [view, setView] = useState('sets'); // 'sets' | 'stats'
+  const [view, setView] = useState('sets'); // 'sets' | 'stats' | 'due'
 
   const fetchFlashcardSets = async () => {
     setLoading(true);
@@ -50,24 +55,34 @@ const FlashcardManager = ({ documentId }) => {
 
   const handleNextCard = () => {
     if (selectedSet) {
-      handleReview(currentCardIndex);
+      // handleReview(currentCardIndex);
       setCurrentCardIndex((prev) => (prev + 1) % selectedSet.cards.length);
     }
   };
 
   const handlePrevCard = () => {
     if (selectedSet) {
-      handleReview(currentCardIndex);
+      // handleReview(currentCardIndex);
       setCurrentCardIndex((prev) => (prev - 1 + selectedSet.cards.length) % selectedSet.cards.length);
     }
   };
 
-  const handleReview = async (index) => {
-    const card = selectedSet?.cards[currentCardIndex];
-    if (!card) return;
+  // const handleReview = async (index) => {
+  //   const card = selectedSet?.cards[currentCardIndex];
+  //   if (!card) return;
+  //   try {
+  //     await flashcardService.reviewFlashcard(card._id, index);
+  //   } catch {}
+  // };
+
+  const handleReview = async (cardId, quality) => {
     try {
-      await flashcardService.reviewFlashcard(card._id, index);
-    } catch {}
+      await flashcardService.reviewFlashcard(cardId, quality);
+      // Move to next card
+      setCurrentCardIndex((prev) => (prev + 1) % selectedSet.cards.length);
+    } catch {
+      toast.error('Failed to save review.');
+    }
   };
 
   const handleToggleStar = async (cardId) => {
@@ -85,6 +100,7 @@ const FlashcardManager = ({ documentId }) => {
       toast.error("Failed to update star status.");
     }
   };
+
 
   const handleConfirmDelete = async () => {
     if (!setToDelete) return;
@@ -112,7 +128,7 @@ const FlashcardManager = ({ documentId }) => {
         </button>
         <div className={styles.cardCenter}>
           <div className={styles.cardMaxWidth}>
-            <Flashcard flashcard={currentCard} onToggleStar={handleToggleStar} />
+            <Flashcard flashcard={currentCard} onToggleStar={handleToggleStar} onReview={handleReview} />
           </div>
           <div className={styles.navControls}>
             <button onClick={handlePrevCard} disabled={selectedSet.cards.length <= 1} className={styles.navBtn}>
@@ -180,7 +196,48 @@ const FlashcardManager = ({ documentId }) => {
   return (
     <>
       <div className={styles.container}>
-        {selectedSet ? renderFlashcardViewer() : renderSetList()}
+        <div className={styles.tabRow}>
+          <button
+            className={[styles.tabBtn, view === 'sets' ? styles.tabActive : ''].join(' ')}
+            onClick={() => setView('sets')}
+          >
+            Flashcard Sets
+          </button>
+          <button
+            className={[styles.tabBtn, view === 'stats' ? styles.tabActive : ''].join(' ')}
+            onClick={() => setView('stats')}
+          >
+            Progress Stats
+          </button>
+          <button
+            className={[styles.tabBtn, view === 'due' ? styles.tabActive : ''].join(' ')}
+            onClick={() => setView('due')}
+          >
+            Review Due
+          </button>
+        </div>
+
+        {view === 'due' && (
+          <DueCardsSession
+            documentId={documentId}
+            onExit={() => setView('sets')}
+          />
+        )}
+
+        {view === 'stats' && (
+          <FlashcardStats
+            sets={flashcardSets}
+            onStartReview={(set) => {
+              setSelectedSet(set);
+              setCurrentCardIndex(0);
+              setView('due');
+            }}
+          />
+        )}
+
+        {view === 'sets' && (
+          selectedSet ? renderFlashcardViewer() : renderSetList()
+        )}
       </div>
 
       <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} title="Delete Flashcard Set?">

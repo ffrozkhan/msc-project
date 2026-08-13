@@ -49,13 +49,11 @@ const FlashcardPage = () => {
     }
   };
 
-  const handleReview = async (index) => {
-    const currentCard = flashcards[currentCardIndex];
-    if (!currentCard) return;
-    try {
-      await flashcardService.reviewFlashcard(currentCard._id, index);
-    } catch {}
-  };
+  const handleReview = async (cardId, quality) => {
+  try {
+    await flashcardService.reviewFlashcard(cardId, quality);
+  } catch {}
+};
 
   const handleNextCard = () => { handleReview(currentCardIndex); setCurrentCardIndex((p) => (p + 1) % flashcards.length); };
   const handlePrevCard = () => { handleReview(currentCardIndex); setCurrentCardIndex((p) => (p - 1 + flashcards.length) % flashcards.length); };

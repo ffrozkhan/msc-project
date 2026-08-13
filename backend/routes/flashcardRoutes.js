@@ -5,6 +5,7 @@ import {
   reviewFlashcard,
   toggleStarFlashcard,
   deleteFlashcardSet,
+  getDueCards
 } from '../controllers/flashcardController.js';
 import protect from '../middleware/auth.js';
 
@@ -17,5 +18,6 @@ router.get('/:documentId', getFlashcards);
 router.post('/:cardId/review', reviewFlashcard);
 router.put('/:cardId/star', toggleStarFlashcard);
 router.delete('/:id', deleteFlashcardSet);
+router.get('/due/:documentId', protect, getDueCards);
 
 export default router;

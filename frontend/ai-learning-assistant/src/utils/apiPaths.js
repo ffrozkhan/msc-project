@@ -32,6 +32,8 @@ export const API_PATHS = {
     REVIEW_FLASHCARD: (cardId) => `/api/flashcards/${cardId}/review`,
     TOGGLE_STAR: (cardId) => `/api/flashcards/${cardId}/star`,
     DELETE_FLASHCARD_SET: (id) => `/api/flashcards/${id}`,
+    GET_DUE_CARDS: (documentId) => `/api/flashcards/due/${documentId}`,
+    REVIEW_FLASHCARD: (cardId) => `/api/flashcards/${cardId}/review`,
   },
 
   QUIZZES: {
@@ -43,15 +45,17 @@ export const API_PATHS = {
   },
 
   PROGRESS: {
-    GET_DASHBOARD: "/api/progress/dashboard",
+    GET_DASHBOARD: '/api/progress/dashboard',
+    GET_FLASHCARD_STATS: (setId) => `/api/progress/flashcard-stats/${setId}`,
+    GET_GLOBAL_DUE_COUNT: '/api/progress/due-count',
   },
-  
+
   CONVERSATIONS: {
-  GET_ALL: "/api/conversations",
-  CREATE: "/api/conversations",
-  GET_BY_ID: (id) => `/api/conversations/${id}`,
-  SEND_MESSAGE: (id) => `/api/conversations/${id}/message`,
-  UPDATE_TITLE: (id) => `/api/conversations/${id}/title`,
-  DELETE: (id) => `/api/conversations/${id}`,
-},
+    GET_ALL: "/api/conversations",
+    CREATE: "/api/conversations",
+    GET_BY_ID: (id) => `/api/conversations/${id}`,
+    SEND_MESSAGE: (id) => `/api/conversations/${id}/message`,
+    UPDATE_TITLE: (id) => `/api/conversations/${id}/title`,
+    DELETE: (id) => `/api/conversations/${id}`,
+  },
 };
