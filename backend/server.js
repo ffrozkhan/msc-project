@@ -16,6 +16,8 @@ import quizRoutes from './routes/quizRoutes.js'
 import progressRoutes from './routes/progressRoutes.js'
 import conversationRoutes from './routes/conversationRoutes.js'
 import videoAnswerRoutes from './routes/videoAnswerRoutes.js';
+import knowledgeGraphRoutes from './routes/knowledgeGraphRoutes.js';
+
 
 // ES6 module __dirname alternative
 const __filename = fileURLToPath(import.meta.url);
@@ -53,6 +55,7 @@ app.use('/api/quizzes', quizRoutes)
 app.use('/api/progress', progressRoutes)
 app.use('/api/conversations', conversationRoutes);
 app.use('/api/video-answers', videoAnswerRoutes);
+app.use('/api/knowledge-graph', knowledgeGraphRoutes);
 
 app.use(errorHandler);
 
