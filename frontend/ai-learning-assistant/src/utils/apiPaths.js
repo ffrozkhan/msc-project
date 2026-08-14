@@ -58,4 +58,9 @@ export const API_PATHS = {
     UPDATE_TITLE: (id) => `/api/conversations/${id}/title`,
     DELETE: (id) => `/api/conversations/${id}`,
   },
+  KNOWLEDGE_GRAPH: {
+  GET:      (documentId) => `/api/knowledge-graph/${documentId}`,
+  GENERATE: (documentId) => `/api/knowledge-graph/generate/${documentId}`,
+  DELETE:   (documentId) => `/api/knowledge-graph/${documentId}`,
+},
 };

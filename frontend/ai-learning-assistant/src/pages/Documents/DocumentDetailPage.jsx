@@ -12,6 +12,7 @@ import FlashcardManager from '../../components/flashcards/FlashcardManager';
 import QuizManager from '../../components/quizzes/QuizManager';
 import styles from './DocumentDetailPage.module.css';
 import VideoAnswer from '../../components/documents/VideoAnswer';
+import KnowledgeGraph from '../../components/documents/KnowledgeGraph';
 
 const DocumentDetailPage = () => {
   const { id } = useParams();
@@ -63,6 +64,7 @@ const DocumentDetailPage = () => {
   const tabs = [
     { name: 'Content', label: 'Content', content: renderContent() },
     { name: 'Chat', label: 'Chat', content: <ChatInterface /> },
+    { name: 'Knowledge Graph', label: 'Knowledge Graph', content: <KnowledgeGraph documentId={id} /> },
     { name: 'AI Actions', label: 'AI Actions', content: <AIActions /> },
     { name: 'Flashcards', label: 'Flashcards', content: <FlashcardManager documentId={id} /> },
     { name: 'Quizzes', label: 'Quizzes', content: <QuizManager documentId={id} /> },
