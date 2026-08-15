@@ -8,6 +8,7 @@ import {
   changePassword
 } from '../controllers/authController.js';
 import protect from '../middleware/auth.js';
+import { validateChangePassword } from '../middleware/validate.js';
 
 const router = express.Router();
 
@@ -38,11 +39,11 @@ const loginValidation = [
 
 // Public routes
 router.post('/register', registerValidation, register);
-router.post('/login', loginValidation, login);
+router.post('/login',    loginValidation,    login);
 
 // Protected routes
-router.get('/profile', protect, getProfile);
-router.put('/profile', protect, updateProfile);
-router.post('/change-password', protect, changePassword);
+router.get('/profile',         protect, getProfile);
+router.put('/profile',         protect, updateProfile);
+router.post('/change-password', protect, validateChangePassword, changePassword);
 
 export default router;

@@ -8,16 +8,17 @@ import {
   getDueCards
 } from '../controllers/flashcardController.js';
 import protect from '../middleware/auth.js';
+import { validateReview } from '../middleware/validate.js';
 
 const router = express.Router();
 
 router.use(protect);
 
 router.get('/', getAllFlashcardSets);
+router.get('/due/:documentId', getDueCards);
 router.get('/:documentId', getFlashcards);
-router.post('/:cardId/review', reviewFlashcard);
+router.post('/:cardId/review', validateReview, reviewFlashcard);
 router.put('/:cardId/star', toggleStarFlashcard);
 router.delete('/:id', deleteFlashcardSet);
-router.get('/due/:documentId', protect, getDueCards);
 
 export default router;
