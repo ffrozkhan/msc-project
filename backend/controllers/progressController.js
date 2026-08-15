@@ -74,6 +74,101 @@ import ReviewHistory from '../models/ReviewHistory.js';
 //   }
 // };
 
+// export const getDashboard = async (req, res, next) => {
+//   try {
+//     const userId = req.user._id;
+
+//     // Get all existing document IDs for this user
+//     const existingDocIds = await Document.distinct('_id', { userId });
+
+//     // Get counts
+//     const totalDocuments = await Document.countDocuments({ userId });
+//     const totalQuizzes   = await Quiz.countDocuments({ userId });
+//     const completedQuizzes = await Quiz.countDocuments({ userId, completedAt: { $ne: null } });
+
+//     // Only count flashcard sets for documents that still exist
+//     const flashcardSets = await Flashcard.find({
+//       userId,
+//       documentId: { $in: existingDocIds }
+//     });
+
+//     console.log('existingDocIds:', existingDocIds);
+//     console.log('flashcardSets count:', flashcardSets.length);
+//     console.log('sets breakdown:', flashcardSets.map(s => ({ id: s._id, docId: s.documentId, cards: s.cards.length })));
+
+//     const totalFlashcardSets = flashcardSets.length;
+
+//     let totalFlashcards    = 0;
+//     let reviewedFlashcards = 0;
+//     let starredFlashcards  = 0;
+
+//     flashcardSets.forEach(set => {
+//       totalFlashcards    += set.cards.length;
+//       reviewedFlashcards += set.cards.filter(c => c.reviewCount > 0).length;
+//       starredFlashcards  += set.cards.filter(c => c.isStarred).length;
+//     });
+
+//     // Quiz statistics
+//     const quizzes = await Quiz.find({ userId, completedAt: { $ne: null } });
+//     const averageScore = quizzes.length > 0
+//       ? Math.round(quizzes.reduce((sum, q) => sum + q.score, 0) / quizzes.length)
+//       : 0;
+
+//     // Recent activity
+//     const recentDocuments = await Document.find({ userId })
+//       .sort({ lastAccessed: -1 })
+//       .limit(5)
+//       .select('title fileName lastAccessed status');
+
+//     const recentQuizzes = await Quiz.find({ userId })
+//       .sort({ createdAt: -1 })
+//       .limit(5)
+//       .populate('documentId', 'title')
+//       .select('title score totalQuestions completedAt');
+
+//     // Real study streak from ReviewHistory
+//     let studyStreak = 0;
+//     try {
+//       const today = new Date();
+//       for (let i = 0; i < 30; i++) {
+//         const day = new Date(today);
+//         day.setDate(day.getDate() - i);
+//         const dayStart = new Date(new Date(day).setHours(0, 0, 0, 0));
+//         const dayEnd   = new Date(new Date(day).setHours(23, 59, 59, 999));
+//         const reviewed = await ReviewHistory.findOne({
+//           userId,
+//           reviewedAt: { $gte: dayStart, $lte: dayEnd }
+//         });
+//         if (reviewed) studyStreak++;
+//         else break;
+//       }
+//     } catch {}
+
+//     res.status(200).json({
+//       success: true,
+//       data: {
+//         overview: {
+//           totalDocuments,
+//           totalFlashcardSets,
+//           totalFlashcards,
+//           reviewedFlashcards,
+//           starredFlashcards,
+//           totalQuizzes,
+//           completedQuizzes,
+//           averageScore,
+//           studyStreak
+//         },
+//         recentActivity: {
+//           documents: recentDocuments,
+//           quizzes:   recentQuizzes
+//         }
+//       }
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 export const getDashboard = async (req, res, next) => {
   try {
     const userId = req.user._id;
@@ -82,8 +177,8 @@ export const getDashboard = async (req, res, next) => {
     const existingDocIds = await Document.distinct('_id', { userId });
 
     // Get counts
-    const totalDocuments = await Document.countDocuments({ userId });
-    const totalQuizzes   = await Quiz.countDocuments({ userId });
+    const totalDocuments   = await Document.countDocuments({ userId });
+    const totalQuizzes     = await Quiz.countDocuments({ userId });
     const completedQuizzes = await Quiz.countDocuments({ userId, completedAt: { $ne: null } });
 
     // Only count flashcard sets for documents that still exist
@@ -91,10 +186,6 @@ export const getDashboard = async (req, res, next) => {
       userId,
       documentId: { $in: existingDocIds }
     });
-
-    console.log('existingDocIds:', existingDocIds);
-    console.log('flashcardSets count:', flashcardSets.length);
-    console.log('sets breakdown:', flashcardSets.map(s => ({ id: s._id, docId: s.documentId, cards: s.cards.length })));
 
     const totalFlashcardSets = flashcardSets.length;
 
@@ -144,6 +235,90 @@ export const getDashboard = async (req, res, next) => {
       }
     } catch {}
 
+    // Global cards due and mastered
+    const now = new Date();
+    const globalCardsDue = flashcardSets.reduce((sum, set) =>
+      sum + set.cards.filter(c => !c.nextReview || new Date(c.nextReview) <= now).length, 0
+    );
+    const cardsMastered = flashcardSets.reduce((sum, set) =>
+      sum + set.cards.filter(c => (c.interval || 1) > 21).length, 0
+    );
+
+    // Quiz score over time (last 10 completed quizzes)
+    const scoreOverTime = await Quiz.find({ userId, completedAt: { $ne: null } })
+      .sort({ completedAt: 1 })
+      .limit(10)
+      .select('score completedAt documentId')
+      .populate('documentId', 'title');
+
+    // Study activity heatmap — last 30 days
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 29);
+
+    const reviewActivity = await ReviewHistory.find({
+      userId,
+      reviewedAt: { $gte: thirtyDaysAgo }
+    }).select('reviewedAt');
+
+    const quizActivity = await Quiz.find({
+      userId,
+      completedAt: { $gte: thirtyDaysAgo, $ne: null }
+    }).select('completedAt');
+
+    const activityDays = Array.from({ length: 30 }, (_, i) => {
+      const day = new Date();
+      day.setDate(day.getDate() - (29 - i));
+      const dayStart = new Date(new Date(day).setHours(0, 0, 0, 0));
+      const dayEnd   = new Date(new Date(day).setHours(23, 59, 59, 999));
+      const hasReview = reviewActivity.some(r =>
+        new Date(r.reviewedAt) >= dayStart && new Date(r.reviewedAt) <= dayEnd
+      );
+      const hasQuiz = quizActivity.some(q =>
+        new Date(q.completedAt) >= dayStart && new Date(q.completedAt) <= dayEnd
+      );
+      return { date: dayStart, active: hasReview || hasQuiz };
+    });
+
+    // Document performance table
+    const documents = await Document.find({ userId }).select('title _id');
+    const docPerformance = await Promise.all(documents.map(async (doc) => {
+      const docQuizzes = await Quiz.find({
+        userId,
+        documentId: doc._id,
+        completedAt: { $ne: null }
+      }).select('score completedAt');
+
+      const avgScore = docQuizzes.length > 0
+        ? Math.round(docQuizzes.reduce((sum, q) => sum + q.score, 0) / docQuizzes.length)
+        : null;
+
+      const docSets = flashcardSets.filter(s =>
+        s.documentId.toString() === doc._id.toString()
+      );
+
+      const cardsDue = docSets.reduce((sum, set) =>
+        sum + set.cards.filter(c => !c.nextReview || new Date(c.nextReview) <= now).length, 0
+      );
+      const totalCards = docSets.reduce((sum, set) => sum + set.cards.length, 0);
+
+      let status = 'no data';
+      if (avgScore !== null) {
+        if (avgScore >= 75 && cardsDue === 0)   status = 'on track';
+        else if (avgScore < 60 || cardsDue > 5) status = 'needs attention';
+        else                                     status = 'good';
+      }
+
+      return {
+        documentId:  doc._id,
+        title:       doc.title,
+        avgScore,
+        quizCount:   docQuizzes.length,
+        cardsDue,
+        totalCards,
+        status,
+      };
+    }));
+
     res.status(200).json({
       success: true,
       data: {
@@ -156,11 +331,18 @@ export const getDashboard = async (req, res, next) => {
           totalQuizzes,
           completedQuizzes,
           averageScore,
-          studyStreak
+          studyStreak,
+          globalCardsDue,
+          cardsMastered,
         },
         recentActivity: {
           documents: recentDocuments,
           quizzes:   recentQuizzes
+        },
+        analytics: {
+          scoreOverTime,
+          activityDays,
+          docPerformance,
         }
       }
     });
