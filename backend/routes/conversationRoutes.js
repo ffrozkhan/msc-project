@@ -1,5 +1,6 @@
 import express from 'express';
 import protect from '../middleware/auth.js';
+import { validateMessage, validateTitle } from '../middleware/validate.js';
 
 import {
   getConversations,
@@ -22,7 +23,7 @@ router.route('/:id')
   .get(getConversation)
   .delete(deleteConversation);
 
-router.patch('/:id/title', updateTitle);
-router.post('/:id/message', sendMessage);
+router.patch('/:id/title',   validateTitle,   updateTitle);
+router.post('/:id/message',  validateMessage, sendMessage);
 
 export default router;
