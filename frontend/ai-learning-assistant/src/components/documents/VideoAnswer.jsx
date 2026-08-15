@@ -39,9 +39,9 @@ const VideoAnswer = ({ documentId }) => {
     }, [documentId]);
 
     // Auto-generate question on mount
-    useEffect(() => {
-        handleGenerateQuestion();
-    }, []);
+    // useEffect(() => {
+    //     handleGenerateQuestion();
+    // }, []);
 
     const handleGenerateQuestion = async () => {
         setGeneratingQ(true);
