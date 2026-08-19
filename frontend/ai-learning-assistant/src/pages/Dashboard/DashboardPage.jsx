@@ -157,7 +157,7 @@ const DashboardPage = () => {
     { label: 'Total Documents',  value: overview.totalDocuments,  icon: FileText,      gradient: styles.gradientBlue    },
     { label: 'Total Flashcards', value: overview.totalFlashcards, icon: BookOpen,      gradient: styles.gradientPurple  },
     { label: 'Total Quizzes',    value: overview.totalQuizzes,    icon: Brain,         gradient: styles.gradientEmerald },
-    { label: 'Study Streak',     value: `${overview.studyStreak}d`, icon: Flame,       gradient: styles.gradientOrange  },
+    // { label: 'Study Streak',     value: `${overview.studyStreak}d`, icon: Flame,       gradient: styles.gradientOrange  },
     { label: 'Avg Quiz Score',   value: `${overview.averageScore}%`, icon: TrendingUp, gradient: styles.gradientBlue    },
     { label: 'Cards Mastered',   value: overview.cardsMastered || 0, icon: Star,       gradient: styles.gradientPurple  },
     { label: 'Cards Due Today',  value: overview.globalCardsDue || 0, icon: CheckCircle, gradient: overview.globalCardsDue > 0 ? styles.gradientRed : styles.gradientEmerald },
